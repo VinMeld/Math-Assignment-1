@@ -1,16 +1,18 @@
 int score = 0;
+int x;
+int y;
 String text1="";
 int finite = int(random(2, 10));
 int answer = 0;
-boolean addition = true;
 int correctanswers;
 int incorrectanswers;
 int randomintegeradded; 
 int integercorrect;
 int ran;
-int decider;
+int decider = 5;
 int ran2;
 float average;
+boolean main = true;
 String correctanswer = ""; 
 //Integer.toString(16, 8);
 void setup() {
@@ -19,20 +21,55 @@ void setup() {
   ResetMathQuestion();
 }
 void draw() {
- fill(255);
-rect(100,50,150,80);
+  PFont f = createFont("Georgia", 15);
+  textFont(f);
+  if (main == true) {
+    fill(255);
+    rect(x+400, y+50, 150, 80);
+    fill(0);
+    text("back", 145, 120);
+    if (mousePressed) {
+      if (mouseX>x+400 && mouseX <x+400+150 && mouseY>y+50 && mouseY <y+50+80) {
+        decider = 0;
+      }
+    }
    
-  if (mousePressed) {
-    if (mouseX>100 && mouseX <100+150 && mouseY>50 && mouseY <50+80) {
-      println("The mouse is pressed and over the button");
-      fill(255);
-      addition = true;
+  }
+  if (decider == 0) {
+    background(10);
+
+    textSize(100);
+        fill(255);
+
+    rect(x+100, y+50, 150, 80);
+    fill(0);
+    text("+", 145, 120);
+    fill (255);
+    rect(x+300,y+ 50, 150, 80);
+    rect(x+100, y+150, 150, 80);
+    rect(x+300, y+150, 150, 80);
+    if (mousePressed) {
+      if (mouseX>x+100 && mouseX <x+100+150 && mouseY>y+50 && mouseY <y+50+80) {
+        fill(255);
+        decider = 1;
+      }
+      if (mouseX>x+300 && mouseX <x+300+150 && mouseY>y+50 && mouseY <y+50+80) {
+        fill(255);
+        decider = 2;
+      }
+      if (mouseX>x+100 && mouseX <x+100+150 && mouseY>y+150 && mouseY <y+150+80) {
+        fill(255);
+        decider = 3;
+      }
+      if (mouseX>x+300 && mouseX <x+300+150 && mouseY>y+50 && mouseY <y+50+80) {
+        fill(255);
+        decider = 4;
+      }
     }
   }
-  background(10);
-  if (addition == true) {
-    PFont f = createFont("Georgia", 15);
-    textFont(f);
+  if (decider == 1) {
+    fill(255);
+    background(0);
     textSize(15);
     text("Hi, this is an amazing program because I made it. It's a series of math questions.", 10, 15);
     text("You are in finite field " + finite + " Correct answer is : " + correctanswer, 10, 35);
@@ -45,6 +82,30 @@ rect(100,50,150,80);
     text(sal, 10, 60); 
     text("Your score is " + score, 10, 100);
     correctanswer = Integer.toString(randomintegeradded, finite);
+    rect(x+200, y+150, 150, 80);
+    if (mousePressed) {
+      if (mouseX>x+200 && mouseX <x+200+150 && mouseY>y+150 && mouseY <y+150+80) {
+        decider = 0;
+      }
+    }
+    PFont l = createFont("Georgia", 15);
+    textFont(l);
+    textSize(25);
+    fill(0);
+    text("Back", 250, 200);
+   offscreen();
+  }
+  if (decider == 2) {
+    background(255);
+    text("decider is 2. ", 10, 10);
+  }
+  if (decider == 3) {
+    background(0);
+    text("decider is 3. ", 10, 10);
+  }
+  if (decider == 4) {
+    background(0);
+    text("decider is 4. ", 10, 10);
   }
 }
 void CheckAnswer() {
@@ -80,4 +141,8 @@ void ResetMathQuestion() {
   ran = int(random(1, 10));
   ran2 = int(random(1, 10));
   randomintegeradded = ran + ran2;
+}
+void offscreen(){
+   x -= 100000000;
+  y-= 1000000;
 }
