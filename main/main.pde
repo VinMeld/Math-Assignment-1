@@ -1,3 +1,7 @@
+import interfascia.*;
+GUIController c;
+IFButton math, notmath;
+IFLabel l;
 int score = 0;
 int x;
 int y;
@@ -16,16 +20,28 @@ boolean main = true;
 String correctanswer = ""; 
 //Integer.toString(16, 8);
 void setup() {
+  PFont f = createFont("Georgia", 15);
+  textFont(f);
   size (600, 600); 
   background(10);
+  c = new GUIController (this);
+  math = new IFButton ("Math", 200, 50, 150, 80);
+  notmath = new IFButton ("Non-Math", 400, 50, 150, 80);
+  math.addActionListener(this);
+  notmath.addActionListener(this);
+
+  c.add (math);
+  c.add (notmath);
   ResetMathQuestion();
 }
 void draw() {
+
+
   PFont f = createFont("Georgia", 15);
   textFont(f);
   if (main == true) {
     fill(255);
-    rect(x+400, y+50, 150, 80);
+    rect(400, 50, 150, 80);
     fill(0);
     text("back", 145, 120);
     if (mousePressed) {
@@ -33,19 +49,18 @@ void draw() {
         decider = 0;
       }
     }
-   
   }
   if (decider == 0) {
     background(10);
 
     textSize(100);
-        fill(255);
+    fill(255);
 
     rect(x+100, y+50, 150, 80);
     fill(0);
     text("+", 145, 120);
     fill (255);
-    rect(x+300,y+ 50, 150, 80);
+    rect(x+300, y+ 50, 150, 80);
     rect(x+100, y+150, 150, 80);
     rect(x+300, y+150, 150, 80);
     if (mousePressed) {
@@ -93,7 +108,7 @@ void draw() {
     textSize(25);
     fill(0);
     text("Back", 250, 200);
-   offscreen();
+    offscreen();
   }
   if (decider == 2) {
     background(255);
@@ -142,7 +157,16 @@ void ResetMathQuestion() {
   ran2 = int(random(1, 10));
   randomintegeradded = ran + ran2;
 }
-void offscreen(){
-   x -= 100000000;
+void offscreen() {
+  x -= 100000000;
   y-= 1000000;
+}
+void actionPerformed (GUIEvent e) {
+  if (e.getSource() == math) {
+    decider = 0;
+    c.remove(notmath);
+    c.remove(math);
+  } else if (e.getSource() == notmath) {
+    background(100, 100, 130);
+  }
 }
