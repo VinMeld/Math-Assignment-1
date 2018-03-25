@@ -1,44 +1,69 @@
+/******************************************************************************************************************************************************************************************************************************************************* //<>//
+ Name: Vinay Meldrum
+ 
+ Purpose: For ICS3U class. Because I want a good mark.^
+ 
+ Date: April...?
+ 
+ What it does: It makes a math game with finite field using addition, subtraction, multiplication and division. Non-math game ...
+ 
+ DataDictionary: 
+ 
+ ******************************************************************************************************************************************************************************************************************************************************/
+//Library for buttons
 import interfascia.*;
+//Creating the GUI
 GUIController c;
+//Making the "variables" type thing for the buttons.
 IFButton division, subtraction, addition, multiplication, notmath;
+//Defining integers.
+//Integer for the score
 int score = 0;
-int x;
-int y;
-//Subtraction variables
+
+//Subtraction variables *******************************************************
+//Incorrect answers for the subtraction portion.
 int subincorrectanswers;
+//correct answers for the subtraction portion.
 int subcorrectanswers;
+//Average fo subtraction.
 float subaverage;
+//Correct answer for the subtraction in a Sting.
 String subcorrectanswer;
+//Correct subtraction in a integer.
 int subintegercorrect;
+//Random integers subtracted together.
 int subrandominteger;
-//Addition variables
+int subscore;
+//Addition variables*******************************************************
 int correctanswers;
 int incorrectanswers;
 int randomintegeradded; 
 int integercorrect;
 String correctanswer = ""; 
 float average;
-//Multiplication variables
+//Multiplication variables ************************************************
 int mulincorrectanswers;
 int mulcorrectanswers;
 float mulaverage;
 String mulcorrectanswer;
 int mulintegercorrect;
 int mulrandominteger;
-//Division variables
+int mulscore;
+//Division variables ******************************************************
 int divincorrectanswers;
 int divcorrectanswers;
 float divaverage;
 String divcorrectanswer;
 int divintegercorrect;
 int divrandominteger;
+int divscore;
 //Other stuffs
 String text1="";
 int finite = int(random(2, 10));
 int answer = 0;
 boolean title = true;
 int ran;
-int decider = 5;
+int decider = 0;
 int ran2;
 
 boolean main = true;
@@ -67,6 +92,7 @@ void Buttons() {
   notmath.addActionListener(this);
   division.addActionListener(this);
   subtraction.addActionListener(this);
+  multiplication.addActionListener(this);
   c.add (addition);
   c.add (division);
   c.add (subtraction);
@@ -74,8 +100,13 @@ void Buttons() {
   c.add (notmath);
 }
 void DisplayQuestions() {
+  if (decider == 0) {
+    PFont f = createFont("Arial", 15);
+    textFont(f);
+    text("Welcome to my program. Here you can navigate to various different elements of my", 10, 15); 
+    text(" program. math with finite fields and non-math games! HAVE FUN.", 10, 30);
+  }
   if (decider == 1) {
-    fill(255);
     background(0);
     textSize(15);
     text("Hi, this is an amazing program because I made it. It's a series of math questions.", 10, 15);
@@ -94,7 +125,6 @@ void DisplayQuestions() {
     textSize(25);
   }
   if (decider == 2) {
-    fill(255);
     background(0);
     textSize(15);
     text("Hi, this is an amazing program because I made it. It's a series of math questions.", 10, 15);
@@ -106,14 +136,13 @@ void DisplayQuestions() {
     String randominteger2 = str(ran2);
     String sal = randominteger  + " - " +   randominteger2 + " = " + text1;
     text(sal, 10, 60); 
-    text("Your score is " + score, 10, 100);
+    text("Your score is " + subscore, 10, 100);
     subcorrectanswer = Integer.toString(subrandominteger, finite);
     PFont l = createFont("Georgia", 15);
     textFont(l);
     textSize(25);
   }
   if (decider == 3) {
-    fill(255);
     background(0);
     textSize(15);
     text("Hi, this is an amazing program because I made it. It's a series of math questions.", 10, 15);
@@ -125,7 +154,7 @@ void DisplayQuestions() {
     String randominteger2 = str(ran2);
     String sal = randominteger  + " * " +   randominteger2 + " = " + text1;
     text(sal, 10, 60); 
-    text("Your score is " + score, 10, 100);
+    text("Your score is " + mulscore, 10, 100);
     mulcorrectanswer = Integer.toString(mulrandominteger, finite);
     PFont l = createFont("Georgia", 15);
     textFont(l);
@@ -133,8 +162,21 @@ void DisplayQuestions() {
   }
   if (decider == 4) {
     background(0);
-    //  text("decider is 4. ", 10, 10);
-    title = true;
+    textSize(15);
+    text("Hi, this is an amazing program because I made it. It's a series of math questions.", 10, 15);
+    text("You are in finite field " + finite + " Correct answer is : " + divcorrectanswer, 10, 35);
+    text("Incorrect responses: " + divincorrectanswers + " Correct responses: " + divcorrectanswers + " Your average is: " + (String.format("%.2f", divaverage)) + "%", 125, 100);
+    answer = int(text1); 
+    //Displaying question.
+    String randominteger = str(ran);
+    String randominteger2 = str(ran2);
+    String sal = randominteger  + " / " +   randominteger2 + " = " + text1;
+    text(sal, 10, 60); 
+    text("Your score is " + mulscore, 10, 100);
+    divcorrectanswer = Integer.toString(divrandominteger, finite);
+    PFont l = createFont("Georgia", 15);
+    textFont(l);
+    textSize(25);
   }
 }
 void CheckAnswer() {
@@ -154,7 +196,7 @@ void CheckAnswer() {
   if (decider == 1) {
     integercorrect = int(correctanswer);
     if (answer == integercorrect) {
-      score += 10;
+      subscore += 10;
       correctanswers++;
     } else {
       score -= 10;
@@ -163,14 +205,26 @@ void CheckAnswer() {
     text1 = "";
     ResetMathQuestion();
   }
-    if (decider == 3) {
-    integercorrect = int(correctanswer);
+  if (decider == 3) {
+    mulintegercorrect = int(mulcorrectanswer);
     if (answer == mulintegercorrect) {
-      score += 10;
+      mulscore += 10;
       mulcorrectanswers++;
     } else {
-      score -= 10;
+      mulscore -= 10;
       mulincorrectanswers++;
+    }
+    text1 = "";
+    ResetMathQuestion();
+  }
+  if (decider == 4) {
+    divintegercorrect = int(divcorrectanswer);
+    if (answer == divintegercorrect) {
+      divscore += 10;
+      divcorrectanswers++;
+    } else {
+      divscore -= 10;
+      divincorrectanswers++;
     }
     text1 = "";
     ResetMathQuestion();
@@ -192,6 +246,7 @@ void keyPressed() {
       } else {
         average = (float(correctanswers)/(float(incorrectanswers)+float(correctanswers)))*100;
       }
+      finite = int(random(2, 10));
     }
   } else if (decider == 2) {
     if (key == ENTER) {
@@ -201,9 +256,9 @@ void keyPressed() {
       } else {
         subaverage = (float(subcorrectanswers)/(float(subincorrectanswers)+float(subcorrectanswers)))*100;
       }
+      finite = int(random(2, 10));
     }
-  }
-  else if (decider == 3) {
+  } else if (decider == 3) {
     if (key == ENTER) {
       CheckAnswer();
       if (mulcorrectanswers == 0 && mulincorrectanswers ==0) {
@@ -211,29 +266,46 @@ void keyPressed() {
       } else {
         mulaverage = (float(mulcorrectanswers)/(float(mulincorrectanswers)+float(mulcorrectanswers)))*100;
       }
+      finite = int(random(2, 10));
+    }
+  } else if (decider == 4) {
+    if (key == ENTER) {
+      CheckAnswer();
+      if (divcorrectanswers == 0 && divincorrectanswers ==0) {
+        divaverage =0;
+      } else {
+        divaverage = (float(divcorrectanswers)/(float(divincorrectanswers)+float(divcorrectanswers)))*100;
+      }
+      finite = int(random(2, 10));
     }
   }
 }
-  void ResetMathQuestion() {
-    ran = int(random(1, 10));
-    ran2 = int(random(1, 10));
-    subrandominteger = ran - ran2;
-    randomintegeradded = ran + ran2;
-  }
-  void offscreen() {
-    x -= 100000000;
-    y-= 1000000;
-  }
-  void actionPerformed (GUIEvent e) {
-    if (e.getSource() == addition) {
-      decider = 1;
-    } else if (e.getSource() == notmath) {
-      background(100, 100, 130);
-    } else if (e.getSource() == subtraction) {
-      decider = 2;
-    } else if (e.getSource() == multiplication) {
-      decider = 3;
-    } else if (e.getSource() == division) {
-      background(100, 100, 130);
+void ResetMathQuestion() {
+  boolean whole = false;
+  ran = int(random(1, 10));
+  ran2 = int(random(1, 10));
+  subrandominteger = ran - ran2;
+  mulrandominteger = ran * ran2;
+  randomintegeradded = ran + ran2;
+  while (whole == false) {
+    if (ran % ran2 == 0  ) {
+      whole = true;
+      divrandominteger = ran / ran2;
+    } else {
+      ran = int(random(1, 20));
     }
   }
+}
+void actionPerformed (GUIEvent e) {
+  if (e.getSource() == addition) {
+    decider = 1;
+  } else if (e.getSource() == notmath) {
+    background(100, 100, 130);
+  } else if (e.getSource() == subtraction) {
+    decider = 2;
+  } else if (e.getSource() == multiplication) {
+    decider = 3;
+  } else if (e.getSource() == division) {
+    decider = 4;
+  }
+}
