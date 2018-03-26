@@ -10,6 +10,18 @@
  DataDictionary: 
  
  ******************************************************************************************************************************************************************************************************************************************************/
+PImage calm, plus, background, lives;
+int lifecount = 3;
+int start;
+final static short DIM = 50, SPD = 4, BOLD = 4;
+final static short FLOOR = 215, JUMP = 145;
+static int dir, y = FLOOR;
+static int x = 25;
+int closer = 400;
+int timer;
+int ybig = 215;
+boolean alive = true;
+int rectdecider = 1;//int(random(1, 3));
 //Library for buttons
 import interfascia.*;
 //Creating the GUI
@@ -75,12 +87,87 @@ void setup() {
   background(10);
   Buttons();
   ResetMathQuestion();
+  start = millis();
+  calm = loadImage("Calm.png");
+  plus = loadImage("Plussign.png");
+  lives = loadImage("lives.png");
+  background = loadImage("Math.jpg");
 }
 void draw() {
   PFont f = createFont("Georgia", 15);
   textFont(f);
   DisplayQuestions();
+  if (decider == 5) {
+    if (alive == true) {
+      image(background, 0, 0, 600, 600);
+      timer = millis()-start;
+      text(timer, 20, 20);
+      if (dir != 0)  move();
+      image(calm, x, y, DIM, DIM);
+      Challenges();
+      Lifecontrol();
+    } else {
+      Gameover();
+    }
+  }
 }
+void Lifecontrol() {
+  if (lifecount ==3) {
+    image(lives, 100, 10, 40, 40);
+    image(lives, 140, 10, 40, 40);
+    image(lives, 180, 10, 40, 40);
+  } else if (lifecount ==2 ) {
+    image(lives, 140, 10, 40, 40);
+    image(lives, 180, 10, 40, 40);
+  } else if (lifecount ==1) {
+    image(lives, 180, 10, 40, 40);
+  }
+}
+void Gameover() {
+  background(10);
+  text("RETRY PRESS ANY KEY TO CONTINUE YOUR TIME WAS " + timer, 100, 300);
+}
+void Challenges()
+{
+  int howfarback = int(random(400, 800));
+
+  if (rectdecider == 1) {
+    image(plus, closer, ybig, 80, 150);
+    closer-=2;
+    if (timer >= 1000 && timer <= 1999) {
+      closer -=4;
+    } else if (timer >= 2000 && timer <= 4999) {
+      closer-=6;
+    } else if (timer >= 5000 && timer <=10000) {
+      closer-=8;
+    } else if (timer >= 10001) {
+      closer -=11;
+    }
+    if (closer <= 0) {
+      closer += howfarback;
+    }
+    if (closer <= x && ybig <= y+30) {
+      closer += 400;
+      lifecount -=1;
+    }
+  }
+  if (lifecount == 0) {
+    alive = false;
+  }
+}
+
+
+void mousePressed() {
+  keyPressed();
+}
+static void move() {
+  if ((y += dir) < JUMP)  dir *= -1;
+  else if (y > FLOOR) {
+    dir = 0;
+    y = FLOOR;
+  }
+}
+
 void Buttons() {
   c = new GUIController (this);
   division = new IFButton ("Division", 240, 583, 80, 17);
@@ -231,10 +318,21 @@ void CheckAnswer() {
   }
 }
 void keyPressed() {
-  text1+=key;
-  if (key==BACKSPACE) {
-    if (text1.length()>0) {
-      text1=text1.substring(0, text1.length()-2);
+  if (decider ==5) {
+    if (dir == 0)  dir = -SPD;
+    if (alive == false) {
+      timer = 0;
+      alive = true;
+      lifecount = 3;
+      start = millis();
+    }
+  }
+  if (decider ==1 || decider ==2 || decider ==3 || decider ==4) { 
+    text1+=key;
+    if (key==BACKSPACE) {
+      if (text1.length()>0) {
+        text1=text1.substring(0, text1.length()-2);
+      }
     }
   }
   if (decider == 1) {
@@ -300,7 +398,7 @@ void actionPerformed (GUIEvent e) {
   if (e.getSource() == addition) {
     decider = 1;
   } else if (e.getSource() == notmath) {
-    background(100, 100, 130);
+    decider = 5;
   } else if (e.getSource() == subtraction) {
     decider = 2;
   } else if (e.getSource() == multiplication) {
