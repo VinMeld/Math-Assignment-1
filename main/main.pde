@@ -3,25 +3,34 @@
  
  Purpose: For ICS3U class. Because I want a good mark.^
  
- Date: April...?
+ Date: March 2 2018
  
- What it does: It makes a math game with finite field using addition, subtraction, multiplication and division. Non-math game ...
- 
- DataDictionary: 
+ What it does: It makes a math game with finite field using addition, subtraction, multiplication and division. Non-math game a side scroller game.
+Where you jump to avoid the plus sign. It is called Math Jump.
  
  ******************************************************************************************************************************************************************************************************************************************************/
+//Math Jump****************************************************************************************
+//Importing the images
 PImage calm, plus, background, lives;
 int lifecount = 3;
+//Start is for the timer.
 int start;
+//This is for the jumping part of the non-math game. I think I may reffer to it as Math Jump. Just cause it is easier to type. *********************************
 final static short DIM = 50, SPD = 4, BOLD = 4;
 final static short FLOOR = 215, JUMP = 145;
 static int dir, y = FLOOR;
 static int x = 25;
+//Closer Determines how fast the plus sign will come. So I set it to 400, so that is where the plus sign will spawn. orginally, later on I make a random integer.
 int closer = 400;
+//Timer for the game.
 int timer;
+//This is for the y value of the plus sign. It doesn't really do much... But oh well.
 int ybig = 215;
+//This just determines whether you are alive or naw. So like if you are not alive, then well, you have like the "GAMEOVER" screen sorta thing.
 boolean alive = true;
+//I was orginally thinking, that a random sign could spawn, whether it be plus, minus, multiplication, division, and that decides what it is. But as of rn it does nothing.
 int rectdecider = 1;//int(random(1, 3));
+//Start of math stuff***********************************************************************************************************************************
 //Library for buttons
 import interfascia.*;
 //Creating the GUI
@@ -31,7 +40,7 @@ IFButton division, subtraction, addition, multiplication, notmath;
 //Defining integers.
 //Integer for the score
 int score = 0;
-
+int gamescore;
 //Subtraction variables *******************************************************
 //Incorrect answers for the subtraction portion.
 int subincorrectanswers;
@@ -70,24 +79,35 @@ int divintegercorrect;
 int divrandominteger;
 int divscore;
 //Other stuffs
+//The input for the answers.
 String text1="";
+//Getting the random finite field
 int finite = int(random(2, 10));
+//text1 is a String, so I store it as a integer in answer.
 int answer = 0;
-boolean title = true;
+//This is the random integer that gets displayed.
 int ran;
+//This just decides whether it is addition, subtraction etc.
 int decider = 0;
+//The other random integer that is displayed.
 int ran2;
 
-boolean main = true;
-//Integer.toString(16, 8);
 void setup() {
+//Setting up the font.
   PFont f = createFont("Georgia", 15);
   textFont(f);
-  size (600, 600); 
+  //size of it.
+  size (600, 600);
+  //Background of it.
   background(10);
+  //Running the different functions.
+  //Buttons dispplays the buttons.
   Buttons();
+  if (decider == 5){
+   start = millis(); 
+  }
+  //ResetMath questions just resets it after you press enter.
   ResetMathQuestion();
-  start = millis();
   calm = loadImage("Calm.png");
   plus = loadImage("Plussign.png");
   lives = loadImage("lives.png");
@@ -98,10 +118,11 @@ void draw() {
   textFont(f);
   DisplayQuestions();
   if (decider == 5) {
+    //Just displays the stuff.
     if (alive == true) {
-      image(background, 0, 0, 600, 600);
       timer = millis()-start;
-      text(timer, 20, 20);
+      image(background, 0, 0, 600, 600);
+      text(gamescore, 20, 20);
       if (dir != 0)  move();
       image(calm, x, y, DIM, DIM);
       Challenges();
@@ -112,6 +133,7 @@ void draw() {
   }
 }
 void Lifecontrol() {
+  //Lifecontrol, so it displays it depending on how many you have. 
   if (lifecount ==3) {
     image(lives, 100, 10, 40, 40);
     image(lives, 140, 10, 40, 40);
@@ -124,11 +146,13 @@ void Lifecontrol() {
   }
 }
 void Gameover() {
+  //Just the gameover screen.
   background(10);
-  text("RETRY PRESS ANY KEY TO CONTINUE YOUR TIME WAS " + timer, 100, 300);
+  text("RETRY PRESS ANY KEY TO CONTINUE YOUR SCORE WAS " + gamescore, 100, 300);
 }
 void Challenges()
 {
+  //This just makes the rectangle move foward or backwards.
   int howfarback = int(random(400, 800));
 
   if (rectdecider == 1) {
@@ -145,9 +169,10 @@ void Challenges()
     }
     if (closer <= 0) {
       closer += howfarback;
+      gamescore +=10;
     }
     if (closer <= x && ybig <= y+30) {
-      closer += 400;
+      closer += howfarback;
       lifecount -=1;
     }
   }
@@ -155,11 +180,7 @@ void Challenges()
     alive = false;
   }
 }
-
-
-void mousePressed() {
-  keyPressed();
-}
+//Jump up and down in the game.
 static void move() {
   if ((y += dir) < JUMP)  dir *= -1;
   else if (y > FLOOR) {
@@ -169,6 +190,7 @@ static void move() {
 }
 
 void Buttons() {
+  //Shows the buttons
   c = new GUIController (this);
   division = new IFButton ("Division", 240, 583, 80, 17);
   notmath = new IFButton ("Non-Math", 320, 583, 80, 17);
@@ -186,25 +208,29 @@ void Buttons() {
   c.add (multiplication);
   c.add (notmath);
 }
+//This just displays the question of the main title thingy. 
 void DisplayQuestions() {
   if (decider == 0) {
-    PFont f = createFont("Arial", 15);
-    textFont(f);
+        PFont l = createFont("Georgia", 15);
+    textFont(l);
+    textSize(15);
     text("Welcome to my program. Here you can navigate to various different elements of my", 10, 15); 
-    text(" program. math with finite fields and non-math games! HAVE FUN.", 10, 30);
+    text(" program. math with finite fields and non-math games! HAVE FUN. ", 10, 30);
+    text("The first two numbers are in decimal. Figure out what they are in the specific finite field. ",10,55);
+    text ("That is for the math game.",10,70);
   }
   if (decider == 1) {
     background(0);
     textSize(15);
     text("Hi, this is an amazing program because I made it. It's a series of math questions.", 10, 15);
-    text("You are in finite field " + finite + " Correct answer is : " + correctanswer, 10, 35);
+    text("You are in finite field " + finite, 10, 35);
     text("Incorrect responses: " + incorrectanswers + " Correct responses: " + correctanswers + " Your average is: " + (String.format("%.2f", average)) + "%", 125, 100);
     answer = int(text1); 
     //Displaying question.
     String randominteger = str(ran);
     String randominteger2 = str(ran2);
     String sal = randominteger  + " + " +   randominteger2 + " = " + text1;
-    text(sal, 10, 60); 
+    text(sal, 10, 75); 
     text("Your score is " + score, 10, 100);
     correctanswer = Integer.toString(randomintegeradded, finite);
     PFont l = createFont("Georgia", 15);
@@ -215,7 +241,7 @@ void DisplayQuestions() {
     background(0);
     textSize(15);
     text("Hi, this is an amazing program because I made it. It's a series of math questions.", 10, 15);
-    text("You are in finite field " + finite + " Correct answer is : " + subcorrectanswer, 10, 35);
+    text("You are in finite field " + finite, 10, 35);
     text("Incorrect responses: " + subincorrectanswers + " Correct responses: " + subcorrectanswers + " Your average is: " + (String.format("%.2f", subaverage)) + "%", 125, 100);
     answer = int(text1); 
     //Displaying question.
@@ -233,7 +259,7 @@ void DisplayQuestions() {
     background(0);
     textSize(15);
     text("Hi, this is an amazing program because I made it. It's a series of math questions.", 10, 15);
-    text("You are in finite field " + finite + " Correct answer is : " + mulcorrectanswer, 10, 35);
+    text("You are in finite field " + finite , 10, 35);
     text("Incorrect responses: " + mulincorrectanswers + " Correct responses: " + mulcorrectanswers + " Your average is: " + (String.format("%.2f", mulaverage)) + "%", 125, 100);
     answer = int(text1); 
     //Displaying question.
@@ -251,7 +277,7 @@ void DisplayQuestions() {
     background(0);
     textSize(15);
     text("Hi, this is an amazing program because I made it. It's a series of math questions.", 10, 15);
-    text("You are in finite field " + finite + " Correct answer is : " + divcorrectanswer, 10, 35);
+    text("You are in finite field " + finite, 10, 35);
     text("Incorrect responses: " + divincorrectanswers + " Correct responses: " + divcorrectanswers + " Your average is: " + (String.format("%.2f", divaverage)) + "%", 125, 100);
     answer = int(text1); 
     //Displaying question.
@@ -267,6 +293,7 @@ void DisplayQuestions() {
   }
 }
 void CheckAnswer() {
+  //Checking the answer here just to see if it is right or wrong, and adding the score, or taking away etc.
   finite = int(random(2, 10));
   if (decider == 2) {
     subintegercorrect = int(subcorrectanswer);
@@ -317,11 +344,19 @@ void CheckAnswer() {
     ResetMathQuestion();
   }
 }
+//So you can jump with the mouse.
+void mousePressed(){
+ if (decider ==5){
+  keyPressed(); 
+ }
+}
+//Making it so you can jump with any key, and you can type in the answer for the math stuffz.
 void keyPressed() {
   if (decider ==5) {
     if (dir == 0)  dir = -SPD;
     if (alive == false) {
       timer = 0;
+      gamescore = 0;
       alive = true;
       lifecount = 3;
       start = millis();
@@ -378,6 +413,7 @@ void keyPressed() {
     }
   }
 }
+//Just reseting the math question.
 void ResetMathQuestion() {
   boolean whole = false;
   ran = int(random(1, 10));
@@ -394,6 +430,7 @@ void ResetMathQuestion() {
     }
   }
 }
+//If the button is pressed, then do something else.
 void actionPerformed (GUIEvent e) {
   if (e.getSource() == addition) {
     decider = 1;
