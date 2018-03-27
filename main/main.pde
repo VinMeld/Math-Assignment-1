@@ -11,7 +11,7 @@ Where you jump to avoid the plus sign. It is called Math Jump.
  ******************************************************************************************************************************************************************************************************************************************************/
 //Math Jump****************************************************************************************
 //Importing the images
-PImage calm, plus, background, lives;
+PImage calm, plus, background, lives, hillroy, trump, usa;
 int lifecount = 3;
 //Start is for the timer.
 int start;
@@ -112,6 +112,9 @@ void setup() {
   plus = loadImage("Plussign.png");
   lives = loadImage("lives.png");
   background = loadImage("Math.jpg");
+  hillroy = loadImage("Hilory.png");
+  trump = loadImage("Trump.png");
+  usa = loadImage("Flag.png");
 }
 void draw() {
   PFont f = createFont("Georgia", 15);
@@ -121,10 +124,10 @@ void draw() {
     //Just displays the stuff.
     if (alive == true) {
       timer = millis()-start;
-      image(background, 0, 0, 600, 600);
+      image(usa, 0, 0, 600, 600);
       text(gamescore, 20, 20);
       if (dir != 0)  move();
-      image(calm, x, y, DIM, DIM);
+      image(hillroy, x, y, DIM, DIM);
       Challenges();
       Lifecontrol();
     } else {
@@ -156,7 +159,7 @@ void Challenges()
   int howfarback = int(random(400, 800));
 
   if (rectdecider == 1) {
-    image(plus, closer, ybig, 80, 150);
+    image(trump, closer, ybig, 300, 200);
     closer-=2;
     if (timer >= 1000 && timer <= 1999) {
       closer -=4;
