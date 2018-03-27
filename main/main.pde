@@ -6,7 +6,7 @@
  Date: March 2 2018
  
  What it does: It makes a math game with finite field using addition, subtraction, multiplication and division. Non-math game a side scroller game.
-Where you jump to avoid the plus sign. It is called Math Jump.
+ Where you jump to avoid the plus sign. It is called Math Jump.
  
  ******************************************************************************************************************************************************************************************************************************************************/
 //Math Jump****************************************************************************************
@@ -226,14 +226,14 @@ void DisplayQuestions() {
     background(0);
     textSize(15);
     text("Hi, this is an amazing program because I made it. It's a series of math questions.", 10, 15);
-    text("You are in finite field " + finite, 10, 35);
+    text("You are in finite field " + finite + "Correct answer " +  correctanswer, 10, 35);
     text("Incorrect responses: " + incorrectanswers + " Correct responses: " + correctanswers + " Your average is: " + (String.format("%.2f", average)) + "%", 125, 100);
     answer = int(text1); 
     //Displaying question.
     String randominteger = str(ran);
     String randominteger2 = str(ran2);
     String sal = randominteger  + " + " +   randominteger2 + " = " + text1;
-    text(sal, 10, 75); 
+    text(sal, 10, 60); 
     text("Your score is " + score, 10, 100);
     correctanswer = Integer.toString(randomintegeradded, finite);
     PFont l = createFont("Georgia", 15);
@@ -300,6 +300,9 @@ void CheckAnswer() {
   finite = int(random(2, 10));
   if (decider == 2) {
     subintegercorrect = int(subcorrectanswer);
+    if (ran -ran2 == 0){
+        subintegercorrect = 0; 
+    }
     if (answer == subintegercorrect) {
       score += 10;
       subcorrectanswers++;
