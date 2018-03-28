@@ -1,11 +1,11 @@
-/******************************************************************************************************************************************************************************************************************************************************* //<>//
+/******************************************************************************************************************************************************************************************************************************************************* //<>// //<>// //<>//
  Name: Vinay Meldrum
  
  Purpose: For ICS3U class. Because I want a good mark.^
  
  Date: March 2 2018
  
- What it does: It makes a math game with finite field using addition, subtraction, multiplication and division. Non-math game a side scroller game.
+ What it does: It makes a math game with base's using addition, subtraction, multiplication and division. Non-math game a side scroller game.
  Where you jump to avoid the plus sign. It is called Math Jump.
  
  ******************************************************************************************************************************************************************************************************************************************************/
@@ -93,7 +93,7 @@ int decider = 0;
 int ran2;
 
 void setup() {
-//Setting up the font.
+  //Setting up the font.
   PFont f = createFont("Georgia", 15);
   textFont(f);
   //size of it.
@@ -103,8 +103,8 @@ void setup() {
   //Running the different functions.
   //Buttons dispplays the buttons.
   Buttons();
-  if (decider == 5){
-   start = millis(); 
+  if (decider == 5) {
+    start = millis();
   }
   //ResetMath questions just resets it after you press enter.
   ResetMathQuestion();
@@ -214,19 +214,19 @@ void Buttons() {
 //This just displays the question of the main title thingy. 
 void DisplayQuestions() {
   if (decider == 0) {
-        PFont l = createFont("Georgia", 15);
+    PFont l = createFont("Georgia", 15);
     textFont(l);
     textSize(15);
     text("Welcome to my program. Here you can navigate to various different elements of my", 10, 15); 
-    text(" program. math with finite fields and non-math games! HAVE FUN. ", 10, 30);
-    text("The first two numbers are in decimal. Figure out what they are in the specific finite field. ",10,55);
-    text ("That is for the math game.",10,70);
+    text(" program. math with base and non-math games! HAVE FUN. ", 10, 30);
+    text("The first two numbers are in decimal. Figure out what they are in the specific finite field. ", 10, 55);
+    text ("That is for the math game.", 10, 70);
   }
   if (decider == 1) {
     background(0);
     textSize(15);
     text("Hi, this is an amazing program because I made it. It's a series of math questions.", 10, 15);
-    text("You are in finite field " + finite + "Correct answer " +  correctanswer, 10, 35);
+    text("You are in base " + finite + "Correct answer " +  correctanswer +  " "+ randomintegeradded, 10, 35);
     text("Incorrect responses: " + incorrectanswers + " Correct responses: " + correctanswers + " Your average is: " + (String.format("%.2f", average)) + "%", 125, 100);
     answer = int(text1); 
     //Displaying question.
@@ -237,14 +237,15 @@ void DisplayQuestions() {
     text("Your score is " + score, 10, 100);
     correctanswer = Integer.toString(randomintegeradded, finite);
     PFont l = createFont("Georgia", 15);
-    textFont(l);
+    textFont(l); //<>//
     textSize(25);
   }
   if (decider == 2) {
     background(0);
     textSize(15);
+    subcorrectanswer = Integer.toString(subrandominteger, finite);
     text("Hi, this is an amazing program because I made it. It's a series of math questions.", 10, 15);
-    text("You are in finite field " + finite, 10, 35);
+    text("You are in base " + finite + " Correct answer " + subrandominteger, 10, 35);
     text("Incorrect responses: " + subincorrectanswers + " Correct responses: " + subcorrectanswers + " Your average is: " + (String.format("%.2f", subaverage)) + "%", 125, 100);
     answer = int(text1); 
     //Displaying question.
@@ -253,7 +254,6 @@ void DisplayQuestions() {
     String sal = randominteger  + " - " +   randominteger2 + " = " + text1;
     text(sal, 10, 60); 
     text("Your score is " + subscore, 10, 100);
-    subcorrectanswer = Integer.toString(subrandominteger, finite);
     PFont l = createFont("Georgia", 15);
     textFont(l);
     textSize(25);
@@ -262,7 +262,7 @@ void DisplayQuestions() {
     background(0);
     textSize(15);
     text("Hi, this is an amazing program because I made it. It's a series of math questions.", 10, 15);
-    text("You are in finite field " + finite , 10, 35);
+    text("You are in base " + finite + " " + mulrandominteger, 10, 35);
     text("Incorrect responses: " + mulincorrectanswers + " Correct responses: " + mulcorrectanswers + " Your average is: " + (String.format("%.2f", mulaverage)) + "%", 125, 100);
     answer = int(text1); 
     //Displaying question.
@@ -280,7 +280,7 @@ void DisplayQuestions() {
     background(0);
     textSize(15);
     text("Hi, this is an amazing program because I made it. It's a series of math questions.", 10, 15);
-    text("You are in finite field " + finite, 10, 35);
+    text("You are in base " + finite, 10, 35);
     text("Incorrect responses: " + divincorrectanswers + " Correct responses: " + divcorrectanswers + " Your average is: " + (String.format("%.2f", divaverage)) + "%", 125, 100);
     answer = int(text1); 
     //Displaying question.
@@ -300,8 +300,8 @@ void CheckAnswer() {
   finite = int(random(2, 10));
   if (decider == 2) {
     subintegercorrect = int(subcorrectanswer);
-    if (ran -ran2 == 0){
-        subintegercorrect = 0; 
+    if (ran -ran2 == 0) {
+      subintegercorrect = 0;
     }
     if (answer == subintegercorrect) {
       score += 10;
@@ -311,7 +311,7 @@ void CheckAnswer() {
       subincorrectanswers++;
     }
     text1 = "";
-    ResetMathQuestion();
+    ResetMathQuestion(); //<>//
   }
   if (decider == 1) {
     integercorrect = int(correctanswer);
@@ -351,10 +351,10 @@ void CheckAnswer() {
   }
 }
 //So you can jump with the mouse.
-void mousePressed(){
- if (decider ==5){
-  keyPressed(); 
- }
+void mousePressed() {
+  if (decider ==5) {
+    keyPressed();
+  }
 }
 //Making it so you can jump with any key, and you can type in the answer for the math stuffz.
 void keyPressed() {
