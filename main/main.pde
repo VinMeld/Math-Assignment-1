@@ -1,4 +1,4 @@
-/******************************************************************************************************************************************************************************************************************************************************* //<>// //<>// //<>//
+/******************************************************************************************************************************************************************************************************************************************************* //<>// //<>// //<>// //<>// //<>// //<>//
  Name: Vinay Meldrum
  
  Purpose: For ICS3U class. Because I want a good mark.^
@@ -226,7 +226,7 @@ void DisplayQuestions() {
     background(0);
     textSize(15);
     text("Hi, this is an amazing program because I made it. It's a series of math questions.", 10, 15);
-    text("You are in base " + finite + "Correct answer " +  correctanswer +  " "+ randomintegeradded, 10, 35);
+    text("You are in base " + finite, 10, 35);
     text("Incorrect responses: " + incorrectanswers + " Correct responses: " + correctanswers + " Your average is: " + (String.format("%.2f", average)) + "%", 125, 100);
     answer = int(text1); 
     //Displaying question.
@@ -237,7 +237,7 @@ void DisplayQuestions() {
     text("Your score is " + score, 10, 100);
     correctanswer = Integer.toString(randomintegeradded, finite);
     PFont l = createFont("Georgia", 15);
-    textFont(l); //<>//
+    textFont(l);
     textSize(25);
   }
   if (decider == 2) {
@@ -245,7 +245,7 @@ void DisplayQuestions() {
     textSize(15);
     subcorrectanswer = Integer.toString(subrandominteger, finite);
     text("Hi, this is an amazing program because I made it. It's a series of math questions.", 10, 15);
-    text("You are in base " + finite + " Correct answer " + subrandominteger, 10, 35);
+    text("You are in base " + finite, 10, 35);
     text("Incorrect responses: " + subincorrectanswers + " Correct responses: " + subcorrectanswers + " Your average is: " + (String.format("%.2f", subaverage)) + "%", 125, 100);
     answer = int(text1); 
     //Displaying question.
@@ -262,7 +262,7 @@ void DisplayQuestions() {
     background(0);
     textSize(15);
     text("Hi, this is an amazing program because I made it. It's a series of math questions.", 10, 15);
-    text("You are in base " + finite + " " + mulrandominteger, 10, 35);
+    text("You are in base " + finite, 10, 35);
     text("Incorrect responses: " + mulincorrectanswers + " Correct responses: " + mulcorrectanswers + " Your average is: " + (String.format("%.2f", mulaverage)) + "%", 125, 100);
     answer = int(text1); 
     //Displaying question.
@@ -311,7 +311,7 @@ void CheckAnswer() {
       subincorrectanswers++;
     }
     text1 = "";
-    ResetMathQuestion(); //<>//
+    ResetMathQuestion();
   }
   if (decider == 1) {
     integercorrect = int(correctanswer);
@@ -427,12 +427,14 @@ void ResetMathQuestion() {
   subrandominteger = ran - ran2;
   mulrandominteger = ran * ran2;
   randomintegeradded = ran + ran2;
-  while (whole == false) {
-    if (ran % ran2 == 0  ) {
-      whole = true;
-      divrandominteger = ran / ran2;
-    } else {
-      ran = int(random(1, 20));
+  if (decider == 4) {
+    while (whole == false) {
+      if (ran % ran2 == 0  ) {
+        whole = true;
+        divrandominteger = ran / ran2;
+      } else {
+        ran = int(random(1, 20));
+      }
     }
   }
 }
