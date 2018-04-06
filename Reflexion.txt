@@ -1,0 +1,18 @@
+I did the assingment not knowing that I should of written down my milestones and stuff in a project thingy. So, to compensate for that,
+I am going to be making a reflextion doc! Yay. Anyways, at the start, I was unsure of what math I should be writing inside of my code.
+I figured that I would start off with simple addition just to get the code to work and setup a proper workflow. Anyways, I got that 
+working pretty quickly. Then decided to do different bases inside my program. So, you add to numbers in decimal, then you have to figure
+out what that number is in that specific base. I then ran into the problem of multiscreen programming. Orginally I just but square buttons
+on the screen, and if the mouse was inbewteen 2 specific points X & Y, it triggers the new screen. But the problem was that the you can't 
+actually delete the square when you go to a new screen. So, I decided that I needed a button. I looked for a while on different websites
+but I came to the conclusion that I had to import a library. I imported a library with buttons. Unfortuanately, I couldn't make a 
+main screen, and delete the buttons as I go on. Cause the delete function was really buggy. So I just displayed the different buttons on
+the bottom and left it there. Next I just setup the program for addition subtraction multiplication and division. Division was tricky
+because I didn't want any decimals. It would be hard to figure out what 3.4 is in base 2. So, I had to make a little function making sure
+that the number wasn't a decimal. Afterwards I decided to turn my focus on making the game. After browsing through ideas, I figured
+that I would be safest making a sidescroller game. I had to figure out how to make a jump function. Which was the hardest part.
+The rest was pretty easy, adding lives, making a square object come at you. Then I decided to jazz it up a little and import images, cause
+why not right? Anyways, I learnt how to use a proper workflow using github and processing. I learnt how to import different libraries, 
+and new problem solving skills. I regret not using branching to display the different ideas I had and me trying to reach them, but
+not being able to, so deleting it. Or, me having an idea, making a new branch, and actually implemening it in my main code. I also
+regret not creating a project to log my progress. 
