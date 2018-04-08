@@ -10,8 +10,11 @@
  
  ******************************************************************************************************************************************************************************************************************************************************/
 //Math Jump****************************************************************************************
+//Sound
+import processing.sound.*;
+SoundFile Wrong, Win, Lose;
 //Importing the images
-PImage calm, plus, background, lives, hillroy, trump, usa;
+PImage calm, plus, background, lives, hillroy, trump, usa, wall;
 int lifecount = 3;
 //Start is for the timer.
 int start;
@@ -33,6 +36,8 @@ int rectdecider = 1;//int(random(1, 3));
 //Start of math stuff***********************************************************************************************************************************
 //Library for buttons
 import interfascia.*;
+//Sound
+SoundFile Math;
 //Creating the GUI
 GUIController c;
 //Making the "variables" type thing for the buttons.
@@ -115,6 +120,12 @@ void setup() {
   hillroy = loadImage("Hilory.png");
   trump = loadImage("Trump.png");
   usa = loadImage("Flag.png");
+  Win = new SoundFile(this, "Win.mp3");
+  Lose = new SoundFile(this, "Lose.mp3");
+  Wrong = new SoundFile(this, "Wrong.mp3");
+  Math = new SoundFile(this, "Math.mp3");
+  wall = loadImage("Trump1.jpg");
+  thread("MathSong");
 }
 void draw() {
   PFont f = createFont("Georgia", 15);
@@ -135,6 +146,14 @@ void draw() {
     }
   }
 }
+void MathSong() {
+
+  //if (decider == 1 || decider == 2 || decider == 3 || decider == 4 || decider == 0) {
+  //  Math.play();
+  //} else if (decider == 5) {
+  //  Math.stop();
+  //}
+}
 void Lifecontrol() {
   //Lifecontrol, so it displays it depending on how many you have. 
   if (lifecount ==3) {
@@ -151,6 +170,7 @@ void Lifecontrol() {
 void Gameover() {
   //Just the gameover screen.
   background(10);
+  image(wall, 0, 0, 600, 600);
   text("RETRY PRESS ANY KEY TO CONTINUE YOUR SCORE WAS " + gamescore, 100, 300);
 }
 void Challenges()
@@ -173,14 +193,17 @@ void Challenges()
     if (closer <= 0) {
       closer += howfarback;
       gamescore +=10;
+      Win.play();
     }
     if (closer <= x && ybig <= y+30) {
       closer += howfarback;
       lifecount -=1;
+      Wrong.play();
     }
   }
   if (lifecount == 0) {
     alive = false;
+    Lose.play();
   }
 }
 //Jump up and down in the game.
@@ -214,6 +237,7 @@ void Buttons() {
 //This just displays the question of the main title thingy. 
 void DisplayQuestions() {
   if (decider == 0) {
+
     PFont l = createFont("Georgia", 15);
     textFont(l);
     textSize(15);
