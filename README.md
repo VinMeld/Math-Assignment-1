@@ -21,3 +21,5 @@ Division screen:
 ![Division](https://i.imgur.com/hL89LoW.png)
 
 Game:
+
+![Game](http://freegifmaker.me/img/res/1/5/2/3/5/4/1523544270176612.gif?1523544283)
