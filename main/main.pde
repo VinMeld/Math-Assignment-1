@@ -190,17 +190,20 @@ void Challenges()
     } else if (timer >= 10001) {
       closer -=11;
     }
+    //If you dodge it, play the sound, move it back and add more to your score.
     if (closer <= 0) {
       closer += howfarback;
       gamescore +=10;
       Win.play();
     }
+    //If it hits you then the move square back, lose a life and place the wrong soundtrack.
     if (closer <= x && ybig <= y+30) {
       closer += howfarback;
       lifecount -=1;
       Wrong.play();
     }
   }
+  //If you have no life, play the lose sound track and then alive is false, which would go to the gameover screen.
   if (lifecount == 0) {
     alive = false;
     Lose.play();
@@ -216,7 +219,7 @@ static void move() {
 }
 
 void Buttons() {
-  //Shows the buttons
+  //Shows the buttons / setting them up.
   c = new GUIController (this);
   division = new IFButton ("Division", 240, 583, 80, 17);
   notmath = new IFButton ("Non-Math", 320, 583, 80, 17);
@@ -320,7 +323,7 @@ void DisplayQuestions() {
   }
 }
 void CheckAnswer() {
-  //Checking the answer here just to see if it is right or wrong, and adding the score, or taking away etc.
+  //Checking the answer here just to see if it is right or wrong, and adding the score, or taking away etc. Then resetting after the question is answered.
   finite = int(random(2, 10));
   if (decider == 2) {
     subintegercorrect = int(subcorrectanswer);
@@ -374,17 +377,17 @@ void CheckAnswer() {
     ResetMathQuestion();
   }
 }
-//So you can jump with the mouse.
+//So you can jump with the mouse. When the decider is at the game.
 void mousePressed() {
   if (decider ==5) {
     keyPressed();
   }
 }
-//Making it so you can jump with any key, and you can type in the answer for the math stuffz.
 void keyPressed() {
   if (decider ==5) {
     if (dir == 0)  dir = -SPD;
     if (alive == false) {
+      //Resets all the variables if you lose.
       timer = 0;
       gamescore = 0;
       alive = true;
@@ -392,6 +395,7 @@ void keyPressed() {
       start = millis();
     }
   }
+  //Making it so you can jump with any key, and you can type in the answer for the math stuffz.
   if (decider ==1 || decider ==2 || decider ==3 || decider ==4) { 
     text1+=key;
     if (key==BACKSPACE) {
@@ -434,6 +438,7 @@ void keyPressed() {
   } else if (decider == 4) {
     if (key == ENTER) {
       CheckAnswer();
+      //Setting up average.
       if (divcorrectanswers == 0 && divincorrectanswers ==0) {
         divaverage =0;
       } else {
@@ -451,6 +456,7 @@ void ResetMathQuestion() {
   subrandominteger = ran - ran2;
   mulrandominteger = ran * ran2;
   randomintegeradded = ran + ran2;
+  //Making sure that you don't get a decimal answer. So if it is one, then reset it. If not then it is okay. *********************************************************
   if (decider == 4) {
     while (whole == false) {
       if (ran % ran2 == 0  ) {
@@ -462,7 +468,7 @@ void ResetMathQuestion() {
     }
   }
 }
-//If the button is pressed, then do something else.
+//If the button is pressed, then setting up the decider varaiable.
 void actionPerformed (GUIEvent e) {
   if (e.getSource() == addition) {
     decider = 1;
