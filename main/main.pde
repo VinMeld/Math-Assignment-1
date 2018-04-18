@@ -1,4 +1,4 @@
-/******************************************************************************************************************************************************************************************************************************************************* //<>// //<>// //<>// //<>// //<>// //<>//
+/******************************************************************************************************************************************************************************************************************************************************* //<>// //<>// //<>// //<>// //<>// //<>// //<>//
  Name: Vinay Meldrum
  
  Purpose: For ICS3U class. Because I want a good mark.^
@@ -13,6 +13,8 @@
 //Sound
 import processing.sound.*;
 SoundFile Wrong, Win, Lose;
+//Constant for the score.
+final int addscore = 10;
 //Importing the images
 PImage calm, plus, background, lives, hillroy, trump, usa, wall;
 int lifecount = 3;
@@ -193,7 +195,7 @@ void Challenges()
     //If you dodge it, play the sound, move it back and add more to your score.
     if (closer <= 0) {
       closer += howfarback;
-      gamescore +=10;
+      gamescore +=addscore;
       Win.play();
     }
     //If it hits you then the move square back, lose a life and place the wrong soundtrack.
@@ -331,10 +333,10 @@ void CheckAnswer() {
       subintegercorrect = 0;
     }
     if (answer == subintegercorrect) {
-      score += 10;
+      score += addscore;
       subcorrectanswers++;
     } else {
-      score -= 10;
+      score -= addscore;
       subincorrectanswers++;
     }
     text1 = "";
@@ -343,10 +345,10 @@ void CheckAnswer() {
   if (decider == 1) {
     integercorrect = int(correctanswer);
     if (answer == integercorrect) {
-      subscore += 10;
+      subscore += addscore;
       correctanswers++;
     } else {
-      score -= 10;
+      score -= addscore;
       incorrectanswers++;
     }
     text1 = "";
@@ -355,10 +357,10 @@ void CheckAnswer() {
   if (decider == 3) {
     mulintegercorrect = int(mulcorrectanswer);
     if (answer == mulintegercorrect) {
-      mulscore += 10;
+      mulscore += addscore;
       mulcorrectanswers++;
     } else {
-      mulscore -= 10;
+      mulscore -= addscore;
       mulincorrectanswers++;
     }
     text1 = "";
@@ -367,10 +369,10 @@ void CheckAnswer() {
   if (decider == 4) {
     divintegercorrect = int(divcorrectanswer);
     if (answer == divintegercorrect) {
-      divscore += 10;
+      divscore += addscore;
       divcorrectanswers++;
     } else {
-      divscore -= 10;
+      divscore -= addscore;
       divincorrectanswers++;
     }
     text1 = "";
