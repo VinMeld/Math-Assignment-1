@@ -88,7 +88,7 @@ int divscore;
 //Other stuffs
 //The input for the answers.
 String text1="";
-//Getting the random finite field
+//Getting the random base
 int finite = int(random(2, 10));
 //text1 is a String, so I store it as a integer in answer.
 int answer = 0;
@@ -474,13 +474,13 @@ void ResetMathQuestion() {
 void actionPerformed (GUIEvent e) {
   if (e.getSource() == addition) {
     decider = 1;
-  } else if (e.getSource() == notmath) {
-    decider = 5;
   } else if (e.getSource() == subtraction) {
     decider = 2;
   } else if (e.getSource() == multiplication) {
     decider = 3;
   } else if (e.getSource() == division) {
     decider = 4;
+  } else if (e.getSource() == notmath) {
+    decider = 5;
   }
 }
