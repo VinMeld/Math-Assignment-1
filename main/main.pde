@@ -122,11 +122,11 @@ void setup() {
   hillroy = loadImage("Hilory.png");
   trump = loadImage("Trump.png");
   usa = loadImage("Flag.png");
-  Win = new SoundFile(this, "Win.mp3");
+/*  Win = new SoundFile(this, "Win.mp3");
   Lose = new SoundFile(this, "Lose.mp3");
   Wrong = new SoundFile(this, "Wrong.mp3");
   Math = new SoundFile(this, "Math.mp3");
-  wall = loadImage("Trump1.jpg");
+*/wall = loadImage("Trump1.jpg");
   thread("MathSong");
 }
 void draw() {
@@ -263,7 +263,7 @@ void DisplayQuestions() {
     String randominteger2 = str(ran2);
     String sal = randominteger  + " + " +   randominteger2 + " = " + text1;
     text(sal, 10, 60); 
-    text("Your score is " + score, 10, 100);
+    text("Your score is " + subscore, 10, 100);
     correctanswer = Integer.toString(randomintegeradded, finite);
     PFont l = createFont("Georgia", 15);
     textFont(l);
@@ -282,7 +282,7 @@ void DisplayQuestions() {
     String randominteger2 = str(ran2);
     String sal = randominteger  + " - " +   randominteger2 + " = " + text1;
     text(sal, 10, 60); 
-    text("Your score is " + subscore, 10, 100);
+    text("Your score is " + score, 10, 100);
     PFont l = createFont("Georgia", 15);
     textFont(l);
     textSize(25);
@@ -317,7 +317,7 @@ void DisplayQuestions() {
     String randominteger2 = str(ran2);
     String sal = randominteger  + " / " +   randominteger2 + " = " + text1;
     text(sal, 10, 60); 
-    text("Your score is " + mulscore, 10, 100);
+    text("Your score is " + divscore, 10, 100);
     divcorrectanswer = Integer.toString(divrandominteger, finite);
     PFont l = createFont("Georgia", 15);
     textFont(l);
@@ -348,7 +348,7 @@ void CheckAnswer() {
       subscore += addscore;
       correctanswers++;
     } else {
-      score -= addscore;
+      subscore -= addscore;
       incorrectanswers++;
     }
     text1 = "";
@@ -401,9 +401,7 @@ void keyPressed() {
   if (decider ==1 || decider ==2 || decider ==3 || decider ==4) { 
     text1+=key;
     if (key==BACKSPACE) {
-      if (text1.length()>0) {
-        text1=text1.substring(0, text1.length()-2);
-      }
+    text1 = text1.substring(0,max(0,text1.length()-2));
     }
   }
   if (decider == 1) {
