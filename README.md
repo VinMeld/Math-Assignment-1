@@ -1,5 +1,7 @@
 # Math-Assignment-1
 ### This code has math problems and a game. Enjoy!
+In order to run main, you must download 2 libraries. *_interfascia_* and *_sound by processing_*. If you are running the program on an outdated graphic card, be sure to comment out line 125-128. Other than that, have fun! :D
+
 Main screen:
 
 ![Main](https://i.imgur.com/HCFyPtn.png)

@@ -6,5 +6,5 @@ the bottom and left it there. Next, I set up the program for addition, subtracti
 because I didn't want any decimals. It would be hard to figure out what 3.4 is in base 2. So, I had to make a little function making sure
 that the number wasn't a decimal. Afterwards, I decided to turn my focus on making the game. After browsing through ideas, I figured
 that it would be safest making a sidescroller game. I had to figure out how to make a jump function, which was the hardest part.
-The rest was pretty easy, adding lives, making a square object come at you. Then, I decided to jazz it up a little and import images, because why not, right? Anyways, I learned how to use a proper workflow using GitHub and Processing. I learned how to import different libraries, and I learned new problem solving skills. I regret not using branches to display the different ideas I had. I also
-regret not creating a project to log my progress.
+The rest was pretty easy, adding lives, making a square object come at you. Then, I decided to jazz it up a little and import images and sound because why not, right? Anyways, I learned how to use a proper workflow using GitHub and Processing. I learned how to import different libraries, and I learned new problem solving skills. I regret not using branches to display the different ideas I had. I also
+regret not creating a project to log my progress. Which is why I made a project a few days ago to log different milestones I attempted to achieve and ones that I tried, but I couldn't attain it. 
