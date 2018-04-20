@@ -122,11 +122,11 @@ void setup() {
   hillroy = loadImage("Hilory.png");
   trump = loadImage("Trump.png");
   usa = loadImage("Flag.png");
-/*  Win = new SoundFile(this, "Win.mp3");
+  Win = new SoundFile(this, "Win.mp3");
   Lose = new SoundFile(this, "Lose.mp3");
   Wrong = new SoundFile(this, "Wrong.mp3");
   Math = new SoundFile(this, "Math.mp3");
-*/wall = loadImage("Trump1.jpg");
+  wall = loadImage("Trump1.jpg");
   thread("MathSong");
 }
 void draw() {
